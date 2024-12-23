@@ -5,15 +5,19 @@
 
 using namespace std;
 
-bool visited[9]; // 1. bool visit
-vector<int> graph[9]; // 2. vector<int> linked == python list
+bool visited[9]; // bool visit
+vector<int> graph[9]; // vector<int> linked != python list (cannot insert at once)
+// vector<int> linked != python list (cannot insert at once)
 
 void dfs(int x) {
-    visited[x] = true; // visited
-    cout << x << ' '; // process
+    visited[x] = true; // 1. visited
+    cout << x << ' '; // 2. process
     for (int i = 0; i < graph[x].size(); i++){
-        int y = graph[x][i]; // index enter
-        if (!visited[y]) dfs(y); // next recursive
+        // 3. while there exist next visit
+        int y = graph[x][i]; // 4. enter x = 1
+        // graph = {{}, {2, 3, 8}, {1, 7}}
+        // 4. if none condition met, exit and to the previous loop
+        if (!visited[y]) dfs(y); // 5. next recursive y = 2, y = 1
     }
 }
 
@@ -28,7 +32,7 @@ int main(void) {
     *(graph + 7) = {2, 6, 8};
     *(graph + 8) = {1, 7};
      // cpp always {}, if int arr[3];
-     // cpp cannot modify arr (arr == pointer)
+     // cpp cannot modify arr (arr == pointer, cannot insert at once)
 
     dfs(1);
     return 0;
