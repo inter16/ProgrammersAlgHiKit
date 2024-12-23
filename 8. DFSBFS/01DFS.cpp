@@ -32,8 +32,10 @@ int main(void) {
     *(graph + 7) = {2, 6, 8};
     *(graph + 8) = {1, 7};
      // cpp always {}, if int arr[3];
-     // cpp cannot modify arr (arr == pointer, cannot insert at once)
+     // cpp cannot modify arr
+     // (arr == pointer, cannot insert at once)
 
+     // index == pointer *(address) == variable 
     dfs(1);
     return 0;
 }
