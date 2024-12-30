@@ -4,6 +4,32 @@
 
 using namespace std;
 
+/* answer 1
+
+void dfs(int count, int sum, int& length, int& target, int& answer, vector<int>& numbers){
+    // Enter parameters after entering the contents of the function
+    
+    if(count == length){
+        if(target == sum){
+            answer++;
+        }
+        return;
+    }
+    dfs(count + 1, sum + numbers[count], length, target, answer, numbers);
+    dfs(count + 1, sum - numbers[count], length, target, answer, numbers);
+}
+
+int solution(vector<int> numbers, int target) {
+    int answer = 0;
+    int length = numbers.size();
+    
+    dfs(0, 0, length, target, answer, numbers);
+
+    return answer;
+}
+
+*/
+
 /* wrong answer
 
 bool visited[64];
@@ -48,3 +74,27 @@ int solution(vector<int> numbers, int target) {
 }
 
 */
+
+int cnt = 0;
+
+void dfs(vector<int>& numbers, int& target, int idx, int values){
+    if(idx == numbers.size() && values == target){
+        cnt += 1;
+        return;
+    }
+    
+    else if(idx == numbers.size()) return;
+    
+    dfs(numbers, target, idx + 1, values + numbers[idx]);
+    dfs(numbers, target, idx + 1, values - numbers[idx]);
+}
+
+
+
+int solution(vector<int> numbers, int target) {
+    int answer = 0;
+    dfs(numbers, target, 0, 0);
+    answer = cnt;
+    return answer;
+}
+
