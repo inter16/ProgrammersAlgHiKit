@@ -27,16 +27,17 @@ int solution(int distance, vector<int> rocks, int n) {
     }
     
     for(auto i = 0; i < n; i++){
-        int index = tempd1.top().second;
-        cout << -tempd1.top().first << ' ';
-        cout << tempd1.top().second << '\n';
-        tempd1.pop();
-        
-        if(index == rocks.size() - 1) tempd1.push({-(rocks[index] - rocks[index - 2]), index});
-        else if(index == 1) tempd1.push({-(rocks[index + 1] - rocks[index - 1]), index + 1});
-        else if(d2[index] <= d2[index - 1]) tempd1.push({-(rocks[index + 1] - rocks[index - 1]), index + 1});
-        else tempd1.push({-(rocks[index] - rocks[index - 2]), index});
+        int value = tempd1.top().first;
+        while(value == tempd1.top().first){
+            int index = tempd1.top().second;
+            tempd1.pop();
+            if(index == rocks.size() - 1) tempd1.push({-(rocks[index] - rocks[index - 2]), index});
+            else if(index == 1) tempd1.push({-(rocks[index + 1] - rocks[index - 1]), index + 1});
+            else if(d2[index] <= d2[index - 1]) tempd1.push({-(rocks[index + 1] - rocks[index - 1]), index + 1});
+            else tempd1.push({-(rocks[index] - rocks[index - 2]), index});
+        }
     }
+            
     
     
     answer = -tempd1.top().first;
